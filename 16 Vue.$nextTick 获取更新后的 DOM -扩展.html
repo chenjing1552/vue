@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.$nextTick 获取更新后的 DOM</title>
+    <script src="js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div id="box">
+
+
+    <div ref="oDiv">
+
+        {{message}}
+    </div>
+</div>
+<script>
+
+
+    var vm=new Vue({
+        el:'#box',
+        data:{
+            message:'zhangsan',
+            list:[]
+        },
+        mounted:function(){
+            this.message='改变后的数据';
+            console.log(this.$refs.oDiv.textContent);
+
+            /*nextTick里面的代码会在DOM更新后执行*/
+            this.$nextTick(function(){
+                /*数据改变后的dom*/
+                console.log(this.$refs.oDiv.textContent);
+            }.bind(this))
+
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue组件-模板2</title>
+    <script src="js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+
+	<template id="aaa">
+		<div>
+			<h1>标题1</h1>
+			<ul>
+				<li v-for="val in arr">
+					{{val}}
+				</li>
+			</ul>
+		</div>
+	</template>
+
+	<script>
+		var vm=new Vue({
+			el:'#box',
+			components:{
+				'my-aaa':{
+					data(){
+						return {
+							msg:'welcome vue',
+							arr:['apple','banana','orange']
+						}
+					},
+					methods:{
+						ss(){
+                                this.msg='changed';
+						}
+					},
+					template:'#aaa'
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

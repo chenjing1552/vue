@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+
+		<br/>
+		<button @click="a='aaa'">aaa组件</button>
+		<button @click="a='bbb'">bbb组件</button>
+		<br/>
+		<hr/>
+
+		<component :is="a"></component>
+
+	</div>
+
+	<template id="aaa">
+		<div>
+			<h2>这是aa组件的标题</h2>
+
+			<p @click="run">这是aa组件的内容</p>
+		</div>
+
+	</template>
+
+	<script>
+		var vm=new Vue({
+			el:'#box',
+			data:{
+				msg:'this is a vue',
+				a:'bbb'
+			},
+			components:{
+				'aaa':{
+					template:'#aaa',
+					methods:{
+						run:function(){
+
+							alert('这是aaa组件');
+						}
+					}
+				},
+				'bbb':{
+
+					template:'<div>这是bbb组件</div>'
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

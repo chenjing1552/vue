@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件定义的几种方式</title>
+    <script src="js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div id="box">
+    {{name}}
+
+    <v-header></v-header>
+
+
+</div>
+<script>
+
+      //1.定义组件
+
+    var Header={
+
+        template:'<h1>这是一个头部组件</h1>'
+    }
+
+    //注意： 组件名称不能和html标签一样
+
+    var vm=new Vue({
+        el:'#box',
+        data:{
+            name:'zhangsan',
+            age:'123'
+        },
+        components:{
+
+            'v-header':Header   /*2. 另一种注册组件的方式  注册组件*/
+        }
+    });
+
+</script>
+</body>
+</html>

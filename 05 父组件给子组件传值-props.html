@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件</title>
+	<script src="js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+<div id="box">
+	<v-header>
+
+
+	</v-header>
+</div>
+
+
+<template id="header">
+	<div>
+		<h2>我是头部组件---{{msg}}---{{name}}</h2>
+		<br/>
+		<hr/>
+
+		<!--父亲组件给子组件传数据-->
+		<v-nav :msg="msg" :n="name"></v-nav>
+	</div>
+
+</template>
+
+
+<template id="nav">
+	<div>
+		<h2>我是Nav组件-----{{msg}}--{{n}}</h2>
+	</div>
+</template>
+
+
+<script>
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+			'v-header':{
+				template:'#header',
+				data:function(){
+
+					return{
+
+						msg:'header组件的数据',
+						name:'我是父亲组件的name'
+					}
+				},
+
+				components:{
+					'v-nav':{
+						props:['msg','n'],  /*子组件接收数据*/
+						template:'#nav'
+					}
+				}
+			}
+		}
+	});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/vue.js"></script>
+
+</head>
+<body>
+<div id="box">
+	<aaa>
+		<ul slot="ul-slot">
+			<li>ul1111</li>
+			<li>ul2222</li>
+			<li>ul3333</li>
+		</ul>
+
+		<ol slot="ol-slot">
+			<li>ol1111</li>
+			<li>ol2222</li>
+			<li>ol3333</li>
+
+		</ol>
+	</aaa>
+
+
+	<hr/>
+	<br/>
+
+
+	<aaa>
+		<ul slot="ul-slot">
+			<li>ul111111111111111111111</li>
+			<li>ul22222222222222222222</li>
+			<li>ul333322222222222222222222222</li>
+		</ul>
+
+		<ol slot="ol-slot">
+			<li>ol11111111111111111111</li>
+			<li>ol222222222222222222</li>
+			<li>ol333333333333333333</li>
+
+		</ol>
+	</aaa>
+
+
+</div>
+
+<template id="aaa">
+	<div>
+		<h1>这是一个aa组件</h1>
+
+		<br/>
+		<slot name="ul-slot">
+			这是默认情况下的内容
+		</slot>
+
+		<br/>
+		<h1>这是底部</h1>
+
+		<slot name="ol-slot">
+			这是默认情况下的内容
+		</slot>
+	</div>
+</template>
+
+<script>
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+			'aaa':{
+				template:'#aaa'
+			}
+		}
+	});
+
+</script>
+</body>
+</html>

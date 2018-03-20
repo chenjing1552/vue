@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vuejs 教程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <script src="js/vue.js"></script>
+
+
+</head>
+<body>
+    <div id="box">
+       {{msg}}
+        <hr/>
+        <br/>
+
+
+        <v-a></v-a>
+
+        <br/>
+        <v-b></v-b>
+
+        <br/>
+        <v-c></v-c>
+
+    </div>
+
+<template id="a">
+
+    <div>
+        A组件
+        <br/>
+
+        <button @click="send">A组件的按钮</button>
+
+    </div>
+</template>
+
+<template id="b">
+
+    <div>
+        B组件
+
+        <br/>
+
+        <button @click="send">B组件的按钮</button>
+
+
+    </div>
+</template>
+
+<template id="c">
+
+    <div>
+        C组件
+        <br/>
+
+        m:{{m}}<br/>
+        b:{{b}}
+    </div>
+</template>
+
+
+</body>
+</html>
+
+<script>
+
+    window.onload=function(){
+
+        //定义一个空的实例对象
+
+        var Event=new Vue();
+
+        var A={
+
+            template:'#a',
+            data:function(){
+
+                return {
+                    msg:'这是a组件的数据'
+                }
+            },
+            methods:{
+
+                send(){
+                    //alert(this.msg);
+
+                    Event.$emit('aSend',this.msg);  /*广播数据*/
+                }
+            }
+        };
+        var B={
+
+            template:'#b',
+            data:function(){
+
+                return {
+                    msg:'这是B组件的数据11'
+                }
+            },
+            methods:{
+
+                send:function(){
+                    //alert(this.msg);
+
+                    Event.$emit('bSend',this.msg);  /*广播数据*/
+                }
+            }
+        }
+
+        var C={
+
+            template:'#c',
+            data:function(){
+
+                return {
+                    m:'',
+                    b:''
+                }
+            },
+            mounted:function(){
+
+                /*接收广播*/
+
+                var _that=this;
+
+                Event.$on('aSend',function(msg){
+
+                    _that.m=msg;
+                });
+
+
+                Event.$on('bSend',function(msg){
+
+                    _that.b=msg;
+                })
+            }
+        }
+
+
+        new Vue({
+            el:'#box',
+            data:{
+                msg:'this is vue'
+            },
+            components:{
+                'v-a':A,
+                'v-b':B,
+                'v-c':C
+            }
+        });
+    };
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

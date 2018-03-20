@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件</title>
+	<script src="js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+<div id="box">
+	<v-header>
+
+
+	</v-header>
+</div>
+
+
+<template id="header">
+	<div>
+		<h2>我是头部组件---{{msg}}---{{num}}---{{aa}}</h2>
+		<br/>
+		<hr/>
+
+		<!--父亲组件给子组件传数据-->
+		<v-nav :msg="msg" :num="num" :my-num="aa"></v-nav>
+	</div>
+
+</template>
+
+
+<template id="nav">
+	<div>
+		<h2>我是Nav组件-----{{msg}}--{{num}}--{{myNum}}</h2>
+	</div>
+</template>
+
+
+<script>
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+			'v-header':{
+				template:'#header',
+				data:function(){
+
+					return{
+
+						msg:'header组件的数据',
+						//num:10
+
+						num:'这是一个num类型',
+						aa:10
+					}
+				},
+
+				components:{
+					'v-nav':{
+						//props:['msg','n'],  /*子组件接收数据*/
+
+						props:{
+
+							msg:String,   /*msg必须是 字符串类型*/
+							num:Number,
+							//myNum:Number
+							myNum:{    /*驼峰方式接收数据     传值的时候要注意  my-num*/
+
+								type:Number,
+								default:101
+							}
+
+						},
+						template:'#nav'
+					}
+				}
+			}
+		}
+	});
+
+</script>
+</body>
+</html>

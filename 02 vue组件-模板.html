@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue组件-模板</title>
+	<script src="js/vue.js"></script>
+	<style>
+
+		.header{
+
+			border: 1px solid #000;
+			padding:10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		{{msg}}
+
+
+		<v-header></v-header>
+
+		<br/>
+		<br/>
+		<v-footer></v-footer>
+	</div>
+
+
+
+	<script type="x-template" id="header">
+			<div class="header">
+				<h2>这是标题</h2>
+				<p>{{msg}}</p>
+				<button @click="run()">这是一个按钮</button>
+
+			</div>
+	</script>
+
+
+	<script type="x-template" id="footer">
+
+
+		<div class="footer">
+			<h2>这是底部组件的标题</h2>
+			<p>这是一个底部组件的内容</p>
+			<p>这是一个底部组件的内容</p>
+
+		</div>
+
+
+	</script>
+
+
+
+
+	<script>
+
+		//注意：模板里面所有的东西要被根元素包裹起来
+
+		var Header={  /*定义组件*/
+
+			template:'#header',
+			data: function () {
+				return {
+					msg:'这是header组件内容'
+				}
+			},
+			methods:{
+				run:function(){
+
+					this.msg='这是header组件内容-我是改变后的值';
+					alert('run');
+				}
+			}
+		};
+
+
+		var Footer={  /*定义组件*/
+
+			template:'#footer'
+		};
+
+
+		var vm=new Vue({
+			el:'#box',
+			data:{
+				msg:'hello vue'
+			},
+			components:{
+				'v-header':Header,   /*注册组件*/
+
+				'v-footer':Footer
+
+			}
+
+		});
+
+	</script>
+</body>
+</html>

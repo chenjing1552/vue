@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件</title>
+	<script src="js/vue.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+<div id="box">
+	<v-header></v-header>
+
+</div>
+
+
+<template id="header">
+	<div>
+		<h2>我是头部组件---{{msg}}--{{a}}</h2>
+		<br/>
+		<hr/>
+		<v-nav :m="msg" @to-parent="getChildData"></v-nav>
+	</div>
+
+</template>
+
+
+<template id="nav">
+	<div>
+		<h2>我是Nav组件--{{m}}</h2>
+
+		<br/>
+		<br/>
+
+		<button @click="send()">这是nav组件的button，点击给父组件传值</button>
+
+
+	</div>
+</template>
+
+
+<script>
+	var vm=new Vue({
+		el:'#box',
+		data:{
+			a:'aaa'
+		},
+		components:{
+
+			'v-header':{
+				template:'#header',
+				data:function(){
+					return {
+						msg:'这是父亲组件的数据',
+						a:''
+					}
+				},methods:{
+
+					getChildData:function(msg){  //data就是子组件广播过来的数据
+							//alert(msg);
+
+						this.a=msg;
+					}
+				},
+
+				components:{
+					'v-nav':{
+						props:['m'],
+						template:'#nav',
+						data:function(){
+							return {
+								msg:'这是子组件的数据1111'
+							}
+						},
+						methods:{
+
+							send:function(){
+
+
+								//	$emit
+								//alert('111');
+
+								//this.msg  就是data里面的msg
+
+								this.$emit('to-parent',this.msg);  /*1.子组件给父亲组件广播数据*/
+
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+
+</script>
+</body>
+</html>
